@@ -1,0 +1,16 @@
+<div class="container">
+  <app-cockpit
+  (serverCreated)="onServerAdded($event)"
+  (bpCreated)="onBlueprintAdded($event)"
+  ></app-cockpit>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <app-server-element
+      *ngFor="let serverElement of serverElements"
+      [srvElement]="serverElement"></app-server-element>
+      <!-- assigning an alis that links to the server-element component -->
+      <!-- it is found in the parameters of the @input -->
+    </div>
+  </div>
+</div>
