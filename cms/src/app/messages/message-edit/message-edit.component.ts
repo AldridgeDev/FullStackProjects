@@ -17,12 +17,12 @@ export class MessageEditComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSendMessage(){
-    const ingSubject = this.subjectRef.nativeElement.value;
-    const ingMsgText = this.subjectRef.nativeElement.value;
-    const newMsg = new Message(this.currentSender, ingSubject, ingMsgText);
-      this.addMessage.emit(newMsg);
-  }
+  // onSendMessage(){
+  //   const ingSubject = this.subjectRef.nativeElement.value;
+  //   const ingMsgText = this.subjectRef.nativeElement.value;
+  //   const newMsg = new Message(this.currentSender, ingSubject, ingMsgText);
+  //     this.addMessage.emit(newMsg);
+  // }
 
   onClear() {
     this.subjectRef.nativeElement.value = '';
