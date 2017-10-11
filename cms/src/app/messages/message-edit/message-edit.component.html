@@ -32,7 +32,9 @@
           <button
           class="btn btn-success"
           type="submit"
-          (click)="onSendMessage()"
+          (click)="onSendMessage();
+                   preventDefault();
+                   onClear()"
           >Send</button>
 
           <button
@@ -44,6 +46,6 @@
       </div>
 
     </form>
-    
+
   </div>
 </div>
