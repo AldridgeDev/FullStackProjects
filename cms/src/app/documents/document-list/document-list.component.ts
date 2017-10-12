@@ -8,30 +8,30 @@ import { Document } from '../document.model';
 })
 export class DocumentListComponent implements OnInit {
   @Output() selectedDocumentEvent = new EventEmitter<Document>();
-  document: Document[]= [
+  documents: Document[]= [
     new Document(
     '001',
     'Shannon',
     'test description',
-    'test url'),
+    'http://www.google.com'),
 
     new Document(
     '002',
     'David',
     'test description',
-    'test url'),
+    'http://www.msn.com'),
 
     new Document(
     '003',
     'Carol',
     'test description',
-    'test url'),
+    'http://www.lds.org'),
 
     new Document(
     '004',
     'Julian',
     'test description',
-    'test url'),
+    'http://www.live.com')
   ]
 
   constructor() { }
