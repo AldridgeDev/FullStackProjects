@@ -11,7 +11,18 @@ export class ContactService {
     this.contacts = MOCKCONTACTS;
   }
 
-  // getContacts(): Contact[] {
-  //
-  // }
-}
+  getContacts(): Contact[] {
+    return this.contacts.slice();
+  }
+
+  getContact(id: string): Contact {
+    var i = 0;
+    for (let i; i < this.contacts.length ; i++) {
+      if (this.contacts[i].id === id) {
+        return this.contacts[i];
+      }
+     }
+     return null;
+    }
+
+  }
