@@ -1,46 +1,24 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Injectable } from '@angular/core';
 import { Document } from '../document.model';
+import { DocumentService } from '../documents.service';
 
+@Injectable()
 @Component({
   selector: 'cms-document-list',
   templateUrl: './document-list.component.html',
   styleUrls: ['./document-list.component.css']
 })
 export class DocumentListComponent implements OnInit {
-  @Output() selectedDocumentEvent = new EventEmitter<Document>();
-  documents: Document[]= [
-    new Document(
-    '001',
-    'Shannon',
-    'test description',
-    'http://www.google.com'),
+  documents: Document[] = [];
 
-    new Document(
-    '002',
-    'David',
-    'test description',
-    'http://www.msn.com'),
-
-    new Document(
-    '003',
-    'Carol',
-    'test description',
-    'http://www.lds.org'),
-
-    new Document(
-    '004',
-    'Julian',
-    'test description',
-    'http://www.live.com')
-  ]
-
-  constructor() { }
+  constructor(private documentService: DocumentService) { }
 
   ngOnInit() {
+    this.documents = this.documentService.getDocuments();
   }
 
   onSelectedDocument(document: Document) {
-    this.selectedDocumentEvent.emit(document);
+    this.documentService.selectedDocumentEvent.emit(document);
   }
 
 }

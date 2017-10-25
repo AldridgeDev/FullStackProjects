@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter, Output } from '@angular/core';
 import { Contact } from './contact.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 
 @Injectable()
 export class ContactService {
+  @Output() selectedContactEvent = new EventEmitter<Contact>();
 
   contacts: Contact[] = [];
 
@@ -16,10 +17,9 @@ export class ContactService {
   }
 
   getContact(id: string): Contact {
-    var i = 0;
-    for (let i; i < this.contacts.length ; i++) {
-      if (this.contacts[i].id === id) {
-        return this.contacts[i];
+    for (let contact of this.contacts) {
+      if (contact.id === id) {
+        return contact;
       }
      }
      return null;

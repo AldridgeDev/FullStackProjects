@@ -9,8 +9,8 @@ import { ContactService } from '../contact.service';
   styleUrls: ['./contact-list.component.css']
 })
 export class ContactListComponent implements OnInit {
-  @Output() contactWasSelected = new EventEmitter<Contact>();
-  public contacts: Contact[] = [];
+  // @Output() contactWasSelected = new EventEmitter<Contact>();
+  contacts: Contact[] = [];
   // contacts: Contact[] = [
   //   new Contact(
   //     '1',
@@ -30,14 +30,16 @@ export class ContactListComponent implements OnInit {
   //   ];
 
   constructor(private contactService: ContactService) {
-    this.contacts = this.contactService.getContacts();
+    // this.contacts = this.contactService.getContacts();
+    // delete
   }
 
   ngOnInit() {
+    this.contacts = this.contactService.getContacts();
   }
 
   onContactSelected(contact: Contact) {
-    this.contactWasSelected.emit(contact);
+    this.contactService.selectedContactEvent.emit(contact);
   }
 
 }
