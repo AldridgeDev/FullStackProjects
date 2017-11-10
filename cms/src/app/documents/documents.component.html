@@ -1,11 +1,11 @@
 <div class="row col-md-12 pull-right">
-  <div class="col-md-3">
+  <div class="col-md-5">
     <cms-document-list></cms-document-list>
   </div>
-  <div class="col-md-9">
-    <cms-document-detail
-    *ngIf="selectedDocument"
-      [document]="selectedDocument"
-    ></cms-document-detail>
+
+  <div class="col-md-4">
+    <cms-document-detail>
+      <router-outlet></router-outlet>
+    </cms-document-detail>
   </div>
 </div>
