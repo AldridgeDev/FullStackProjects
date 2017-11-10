@@ -20,6 +20,8 @@ import { ContactService } from './contacts/contact.service';
 import { DocumentService } from './documents/documents.service';
 import { DocumentViewComponent } from './documents/document-view/document-view.component';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
+import { WindRefComponent } from './wind-ref/wind-ref.component';
+import { WindRefService } from './wind-ref/wind-ref.service';
 
 @NgModule({
   declarations: [
@@ -38,14 +40,16 @@ import { DocumentEditComponent } from './documents/document-edit/document-edit.c
     MessageEditComponent,
     MessageListComponent,
     DocumentViewComponent,
-    DocumentEditComponent
+    DocumentEditComponent,
+    WindRefComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule
   ],
   providers: [ContactService,
-              DocumentService],
+              DocumentService,
+              WindRefService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
