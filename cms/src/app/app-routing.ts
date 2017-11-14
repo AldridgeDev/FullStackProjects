@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DocumentsComponent } from './documents/documents.component';;
 import { MessagesComponent } from './messages/messages.component';
 import { ContactsComponent } from './contacts/contacts.component';
+import { ContactsDetailComponent } from './contacts/contacts-detail/contacts-detail.component';
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { DocumentDetailComponent } from './documents/document-detail/document-detail.component';
 
