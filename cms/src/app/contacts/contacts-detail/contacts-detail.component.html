@@ -6,8 +6,16 @@
           <h3>{{contact.name}}</h3>
           <img src="{{contact.imgUrl}}" alt="{{contact.name}}">
           <div>
-            <a class="btn btn-danger pull-right" style="color:white">Delete</a>
-            <a class="btn btn-primary pull-right" style="color:white">Edit</a>
+            <a
+            class="btn btn-danger pull-right"
+            style="color:white"
+            (click)="onDelete()"
+            >Delete</a>
+            <a
+            class="btn btn-primary pull-right"
+            style="color:white"
+            routerLink="../:id/edit"
+            >Edit</a>
           </div>
         </div>
       </div>

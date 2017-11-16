@@ -2,17 +2,17 @@
   <div class="panel-heading">
     <div class="row">
       <div class="col-xs-12">
-        <button class="btn btn-success pull-right">New Contact</button>
         <div class="title"><h3>Contacts</h3></div>
+        <button class="btn btn-success pull-right">New Contact</button>
       </div>
     </div>
   </div>
   <div class="panel-body">
       <div class="col-xs-12">
         <cms-contact-item
-          *ngFor="let contact of contacts"
+          *ngFor="let contact of contacts; let i = index"
         [contact]="contact"
-        (contactSelected)="onContactSelected(contact)"
+        [index]="i"
         ></cms-contact-item>
       </div>
     </div>

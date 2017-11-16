@@ -1,9 +1,7 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Message } from '../message.model';
 import { Messages } from '../messages.service';
-// import { ContactService } from '../../contacts/contact.service';
 
-@Injectable()
 @Component({
   selector: 'cms-message-list',
   templateUrl: './message-list.component.html',

@@ -22,6 +22,8 @@ import { DocumentViewComponent } from './documents/document-view/document-view.c
 import { DocumentEditComponent } from './documents/document-edit/document-edit.component';
 import { WindRefComponent } from './wind-ref/wind-ref.component';
 import { WindRefService } from './wind-ref/wind-ref.service';
+import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
+import { Messages } from './messages/messages.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { WindRefService } from './wind-ref/wind-ref.service';
     MessageListComponent,
     DocumentViewComponent,
     DocumentEditComponent,
-    WindRefComponent
+    WindRefComponent,
+    ContactEditComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +52,7 @@ import { WindRefService } from './wind-ref/wind-ref.service';
   ],
   providers: [ContactService,
               DocumentService,
+              Messages,
               WindRefService],
   bootstrap: [AppComponent]
 })
