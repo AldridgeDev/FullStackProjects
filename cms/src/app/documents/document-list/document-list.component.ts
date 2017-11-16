@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output, Injectable } from '@angular/core';
 import { Document } from '../document.model';
 import { DocumentService } from '../documents.service';
+import { Subscription } from 'rxjs/Subscription';
 
 @Injectable()
 @Component({
@@ -10,6 +11,7 @@ import { DocumentService } from '../documents.service';
 })
 export class DocumentListComponent implements OnInit {
   documents: Document[] = [];
+  private subscription: Subscription; //check
 
   constructor(private documentService: DocumentService) { }
 
