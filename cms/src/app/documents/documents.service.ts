@@ -30,7 +30,7 @@ export class DocumentService {
   }
 
   deleteDocument(document: Document) {
-    if (document === null) {
+    if (document === null || document === undefined) {
       return;
     }
 
