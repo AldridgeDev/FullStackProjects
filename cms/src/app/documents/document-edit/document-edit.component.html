@@ -4,7 +4,8 @@
     <form
       id="document-edit"
       #f="ngForm"
-      (ngSubmit)="onSubmit(f)">
+      (ngSubmit)="onSubmit(f)"
+      >
       <div class="row">
 
         <div class="col-sm-12 form-group">
@@ -43,11 +44,11 @@
 
         </div>
       </div>
-      <!-- <div class="alert alert-danger"
+      <div class="alert alert-danger"
         *ngIf="!name.valid OR !documentUrl.valid"
       >
       The Document title and URL are required fields
-    </div> -->
+    </div>
 
       <div class="row">
         <div class="col-xs-12">
