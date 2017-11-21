@@ -3,9 +3,8 @@
 
     <form
       id="document-edit"
-      #f="ngForm"
       (ngSubmit)="onSubmit(f)"
-      >
+      #f="ngForm">
       <div class="row">
 
         <div class="col-sm-12 form-group">
@@ -14,6 +13,7 @@
             name="name"
             [ngModel]="document?.name"
             #name="ngModel"
+            required
             type="text"
             id="name"
             class="form-control"
@@ -24,7 +24,8 @@
         <div class="col-sm-12 form-group">
           <label for="description">Document description</label>
           <input
-
+            name="description"
+            [ngModel]="document?.description"
             type="text"
             id="description"
             class="form-control"
@@ -35,7 +36,10 @@
         <div class="col-sm-12 form-group">
           <label for="documentUrl">Document URL</label>
           <input
-
+            name="documentUrl"
+            [ngModel]="document?.documentUrl"
+            #documentUrl="ngModel"
+            required
             type="text"
             id="documentUrl"
             class="form-control"
@@ -45,8 +49,7 @@
         </div>
       </div>
       <div class="alert alert-danger"
-        *ngIf="!name.valid OR !documentUrl.valid"
-      >
+        *ngIf="!name.valid || !documentUrl.valid">
       The Document title and URL are required fields
     </div>
 

@@ -24,6 +24,9 @@ import { WindRefComponent } from './wind-ref/wind-ref.component';
 import { WindRefService } from './wind-ref/wind-ref.service';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { Messages } from './messages/messages.service';
+import { FormsModule } from '@angular/forms';
+// import { ngForm } from
+
 
 @NgModule({
   declarations: [
@@ -44,15 +47,16 @@ import { Messages } from './messages/messages.service';
     DocumentViewComponent,
     DocumentEditComponent,
     WindRefComponent,
-    ContactEditComponent
+    ContactEditComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    FormsModule,
+    AppRoutingModule,
   ],
   providers: [ContactService,
               DocumentService,
-              Messages,
+              Messages, //the name is correct
               WindRefService],
   bootstrap: [AppComponent]
 })

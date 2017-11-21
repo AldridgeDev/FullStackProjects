@@ -3,7 +3,7 @@
     <form
       id="contact-edit"
       #f="ngForm"
-      (ngSubmit)="onSubmit(#f)"
+      (ngSubmit)="onSubmit(f)"
     >
       <div class="row">
         <div class="col-sm-12 form-group">
@@ -75,7 +75,7 @@
       </div>
 
       <div class="alert alert-danger"
-        *ngIf="!name.valid OR !email.valid">
+        *ngIf="!name.valid || !email.valid">
         The Name and Email are required
       </div>
 

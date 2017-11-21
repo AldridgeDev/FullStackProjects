@@ -16,29 +16,29 @@ export class DocumentEditComponent implements OnInit {
   id: string;
 
   constructor(private route: ActivatedRoute,
-              private router: Router,
-              private documentService: DocumentService
-            ) { }
+    private router: Router,
+    private documentService: DocumentService
+  ) { }
 
   ngOnInit() {
     this.route.params
       .subscribe(
-        (params: Params) => {
-          this.id = params['id'];
+      (params: Params) => {
+        this.id = params['id'];
 
-          if (this.id === undefined || this.id === null) {
-            this.editMode = false;
-            return;
-          }
-
-          this.originalDocument = this.documentService.getDocument(this.id);
-          if (this.originalDocument === undefined || this.originalDocument === null) {
-            return;
-          }
-
-          this.editMode = true;
-          this.document = JSON.parse(JSON.stringify(this.originalDocument));
+        if (this.id === undefined || this.id === null) {
+          this.editMode = false;
+          return;
         }
+
+        this.originalDocument = this.documentService.getDocument(this.id);
+        if (this.originalDocument === undefined || this.originalDocument === null) {
+          return;
+        }
+
+        this.editMode = true;
+        this.document = JSON.parse(JSON.stringify(this.originalDocument));
+      }
       );
   }
 
@@ -46,14 +46,14 @@ export class DocumentEditComponent implements OnInit {
     const values = form.value;
 
     const newDocument = new Document('',
-                                    values.name,
-                                    values.description,
-                                    values.documentURL,
-                                    null);
+      values.name,
+      values.description,
+      values.documentURL,
+      null);
 
     if (this.editMode) {
       this.documentService.updateDocument(this.originalDocument,
-                                               newDocument);
+        newDocument);
     }
     else {
       this.documentService.addDocument(newDocument);
@@ -63,7 +63,7 @@ export class DocumentEditComponent implements OnInit {
     this.onCancel();
   }
 
-  onCancel(){
+  onCancel() {
     this.router.navigate(['/documents']);
   }
 }
