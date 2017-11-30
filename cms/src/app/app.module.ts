@@ -25,7 +25,7 @@ import { WindRefService } from './wind-ref/wind-ref.service';
 import { ContactEditComponent } from './contacts/contact-edit/contact-edit.component';
 import { Messages } from './messages/messages.service';
 import { FormsModule } from '@angular/forms';
-// import { ngForm } from
+import { DndModule } from 'ng2-dnd';
 
 
 @NgModule({
@@ -53,6 +53,7 @@ import { FormsModule } from '@angular/forms';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    DndModule.forRoot(),
   ],
   providers: [ContactService,
               DocumentService,

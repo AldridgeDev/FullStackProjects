@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../contact.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DocumentEditComponent } from '../../documents/document-edit/document-edit.component';
+import { Router, ActivatedRoute, Params } from '@angular/router';
+// import { DocumentEditComponent } from '../../documents/document-edit/document-edit.component';
 import { Contact } from '../contact.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'cms-contact-edit',
@@ -14,12 +15,95 @@ export class ContactEditComponent implements OnInit {
   groupContacts: Contact[] = [];
   editMode: boolean = false;
   hasGroup: boolean = false;
+  originalContact: Contact;
+  id: string;
+  invalidGroupContact: boolean = false;
 
   constructor(private contactService: ContactService,
               private router: Router,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.route.params
+      .subscribe(
+        (params: Params) => {
+          this.id = params['id'];
+
+          if (this.id == undefined || this.id == null) {
+            this.editMode = false;
+            return;
+          }
+
+          this.originalContact = this.contactService.getContact(this.id);
+          if (this.originalContact == undefined || this.originalContact == null) {
+            return;
+          }
+          this.editMode = true;
+          this.contact = JSON.parse(JSON.stringify(this.originalContact));
+
+        }
+      );
   }
 
+  onSubmit(form: NgForm) {
+    const values = form.value;
+      console.log(values);
+    const newContact = new Contact(
+      this.id,
+      values.name,
+      values.email,
+      values.phone,
+      values.imageUrl,
+      this.groupContacts
+    );
+
+    if (this.editMode) {
+      this.contactService.updateContact(this.originalContact, newContact);
+    } else {
+      this.contactService.addContact(newContact);
+    }
+
+    this.router.navigate(['/contact']);
+  }
+
+onCancel(){
+  this.router.navigate(['/contacts']);
+}
+
+isInvalidContact(newContact: Contact){
+  if (!newContact){
+    return true;
+  }
+
+  if (newContact.id === this.contact.id) {
+    return true;
+  }
+
+  for (let i = 0; i < this.groupContacts.length; i++){
+    if (newContact.id === this.groupContacts[i].id) {
+      return true;
+    }
+  }
+  return false;
+}
+
+addToGroup($event: any){
+  let selectedContact: Contact = $event.dragData;
+  this.invalidGroupContact = this.isInvalidContact(selectedContact);
+  if (this.invalidGroupContact){
+    return;
+  }
+  this.groupContacts.push(selectedContact);
+  this.invalidGroupContact = false;
+}
+
+onRemoveItem(idx: number){
+  // if contact is outside the bounds of the array
+  if (idx < 0 || idx >= this.groupContacts.length)
+  return;
+
+  this.groupContacts.splice(idx, 1);
+  this.invalidGroupContact = false;
+
+ }
 }
