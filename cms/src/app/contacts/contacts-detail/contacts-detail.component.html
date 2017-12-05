@@ -3,8 +3,8 @@
     <div class="row">
       <div class="col-xs-12">
         <div class="row" style="padding:20px">
-          <h3>{{contact.name}}</h3>
-          <img src="{{contact.imageUrl}}" alt="{{contact.name}}">
+          <h3>{{contact?.name}}</h3>
+          <img src="{{contact?.imageUrl}}" alt="{{contact?.name}}">
           <div>
             <a
             class="btn btn-danger pull-right"
@@ -24,8 +24,8 @@
   <div class="panel-body">
     <div class="row">
       <div class="col-xs-12">
-        <p>Email: {{contact.email}}</p>
-        <p>Phone: {{contact.phone}}</p>
+        <p>Email: {{contact?.email}}</p>
+        <p>Phone: {{contact?.phone}}</p>
       </div>
     </div>
   </div>

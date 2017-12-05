@@ -20,8 +20,12 @@ export class ContactService {
     return this.contacts.slice();
   }
 
-  getContact(index: string) {
-    return this.contacts[index];
+  getContact(id: string) {
+    for(let contact in this.contacts){
+      if(this.contacts[contact].id === id){
+        return this.contacts[contact];
+      }
+    }
   }
 
   deleteContact(contact: Contact) {

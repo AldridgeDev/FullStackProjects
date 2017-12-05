@@ -26,6 +26,7 @@ import { ContactEditComponent } from './contacts/contact-edit/contact-edit.compo
 import { Messages } from './messages/messages.service';
 import { FormsModule } from '@angular/forms';
 import { DndModule } from 'ng2-dnd';
+import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { DndModule } from 'ng2-dnd';
     DocumentEditComponent,
     WindRefComponent,
     ContactEditComponent,
+    ContactsFilterPipe,
   ],
   imports: [
     BrowserModule,
