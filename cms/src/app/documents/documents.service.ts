@@ -2,6 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 import { Document } from './document.model';
 import { Subject } from 'rxjs/Subject';
+import { Http, Response } from '@angular/http';
+import 'rxjs/Rx';
 
 @Injectable()
 export class DocumentService {
@@ -11,9 +13,8 @@ export class DocumentService {
   documentListChangedEvent = new Subject<Document[]>();
   maxDocumentId: number;
 
-  constructor() {
-    this.documents = MOCKDOCUMENTS;
-    this.maxDocumentId = this.getMaxId();
+  constructor(private http: Http) {
+    this.initDocuments();
   }
 
   getDocuments(): Document[] {
@@ -71,19 +72,31 @@ export class DocumentService {
         }
   }
 
-  // deleteDocument(document: Document) {
-  //   if (document === undefined || document === null){
-  //     return;
-  //   }
-  //
-  //   const pos = this.documents.indexOf(document);
-  //   if (pos < 0) {
-  //     return;
-  //   }
-  //
-  //   this.documents.splice(pos, 1);
-  //   documentsListClone = this.documents.slice();
-  //   documentListChangedEvent.next(documentsListClone);
-  // }
+  initDocuments(){
+    this.http.get('https://fullstackproject-366.firebaseio.com/documents.json')
+      .map(
+        (response:Response) => {
+          const documentsReturned: Document[] = response.json();
+          return documentsReturned;
+        }
+      )
+      .subscribe(
+        (documentsReturned: Document[]) => {
+          this.documents = documentsReturned;
+          this.maxDocumentId = this.getMaxId();
+          this.documentListChangedEvent.next(this.documents.slice());
+        }
+      );
+  }
+
+  storeDocuments(){
+    const jsonDocs = JSON.stringify(this.documents);
+    this.http.put('https://fullstackproject-366.firebaseio.com/documents.json', jsonDocs)
+      .subscribe(
+        () => {
+          this.documentListChangedEvent.next(this.documents.slice());
+        }
+      );
+  }
 
   }

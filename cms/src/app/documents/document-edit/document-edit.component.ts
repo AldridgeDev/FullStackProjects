@@ -42,9 +42,8 @@ export class DocumentEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const values = form.value; // gets values from form's fields
-    console.log(values)
     const newDocument = new Document(
-      this.id,
+      null,
       values.name,
       values.description,
       values.documentUrl,
@@ -52,8 +51,10 @@ export class DocumentEditComponent implements OnInit {
 
     if (this.editMode) {
       this.documentService.updateDocument(this.originalDocument, newDocument);
+      this.router.navigate(['/documents/' + this.originalDocument.id]);
     } else {
       this.documentService.addDocument(newDocument);
+      this.router.navigate(['/documents/' + this.documentService.getMaxId()]);
     }
 
     this.router.navigate(['/documents']);

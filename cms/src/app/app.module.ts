@@ -27,6 +27,7 @@ import { Messages } from './messages/messages.service';
 import { FormsModule } from '@angular/forms';
 import { DndModule } from 'ng2-dnd';
 import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
+import { Http, HttpModule } from '@angular/http';
 
 
 @NgModule({
@@ -56,6 +57,7 @@ import { ContactsFilterPipe } from './contacts/contacts-filter.pipe';
     FormsModule,
     AppRoutingModule,
     DndModule.forRoot(),
+    HttpModule
   ],
   providers: [ContactService,
               DocumentService,
