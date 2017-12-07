@@ -47,27 +47,30 @@ export class ContactService {
      if (newContact === undefined || newContact === null) {
        return;
      }
+
+     const pos = this.contacts.indexOf(newContact);
+     if (pos < 0) {
+       return;
+     }
    }
 
    updateContact(
      originalContact: Contact,
      newContact: Contact) {
-     if (originalContact === undefined ||
-         originalContact === null ||
-         newContact === undefined ||
+     if (originalContact === null ||
          newContact === null) {
            return;
          }
+
+       const pos = this.contacts.indexOf(originalContact);
+       if (pos < 0) {
+         return;
+       }
+       // newContact.id = originalContact;
+       // contacts[pos] = newContact;
+       // contactListChangedEvent = contacts.slice();
+
+
    }
 
-   // deleteContact(contact: Contact) {
-   //   if (contact === undefined || contact === null){
-   //     return;
-   //   }
-   //
-   //   const pos = this.contacts.indexOf(contact);
-   //   if (pos < 0) {
-   //     return;
-   //   }
-   // }
   }

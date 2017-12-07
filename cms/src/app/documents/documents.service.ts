@@ -59,6 +59,11 @@ export class DocumentService {
     if (newDocument === null || newDocument === undefined) {
       return;
     }
+
+    const pos = this.documents.indexOf(newDocument);
+    if (pos < 0) {
+      return;
+    }
   }
 
   updateDocument(
