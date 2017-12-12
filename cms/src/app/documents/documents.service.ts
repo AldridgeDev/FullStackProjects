@@ -46,8 +46,8 @@ export class DocumentService {
     this.storeDocuments();
   }
 
-  getMaxId(): number {
-    let maxId = 0;
+  getMaxId() {
+    let maxId: number = 0;
     for (let document of this.documents) {
       let currentId = +document.id;
       if (currentId > maxId) {
@@ -65,8 +65,7 @@ export class DocumentService {
     this.maxDocumentId++;
     newDocument.id = this.maxDocumentId.toString();
     this.documents.push(newDocument);
-    const documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocuments();
   }
 
   updateDocument(
@@ -86,8 +85,7 @@ export class DocumentService {
 
     newDocument.id = originalDocument.id;
     this.documents[pos] = newDocument;
-    const documentsListClone = this.documents.slice();
-    this.documentListChangedEvent.next(documentsListClone);
+    this.storeDocuments();
   }
 
   initDocuments(){
@@ -102,7 +100,8 @@ export class DocumentService {
         (documentsReturned: Document[]) => {
           this.documents = documentsReturned;
           this.maxDocumentId = this.getMaxId();
-          this.documentListChangedEvent.next(this.documents.slice());
+          const documentsListClone = this.documents.slice();
+          this.documentListChangedEvent.next(documentsListClone);
         }
       );
   }

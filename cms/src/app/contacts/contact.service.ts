@@ -79,8 +79,8 @@ export class ContactService {
        this.contactListChangedEvent.next(contactsListClone);
    }
 
-     getMaxId(): number {
-       this.maxId = 0;
+     getMaxId(){
+       let maxId: number = 0;
        for (let contact of this.contacts) {
          this.currentId = +contact.id;
          if (this.currentId > this.maxId) {
