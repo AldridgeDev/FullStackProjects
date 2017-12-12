@@ -8,6 +8,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class DocumentService {
   documents: Document[] = [];
+  currentId: number;
   selectedDocumentEvent = new EventEmitter<Document>();
   documentChangedEvent = new EventEmitter<Document[]>();
   documentListChangedEvent = new Subject<Document[]>();
@@ -41,7 +42,8 @@ export class DocumentService {
     }
 
     this.documents.splice(pos, 1);
-    this.documentChangedEvent.emit(this.documents.slice());
+    const documentsListClone: Document[]  = this.documents.slice();
+    this.storeDocuments();
   }
 
   getMaxId(): number {
@@ -60,10 +62,11 @@ export class DocumentService {
       return;
     }
 
-    const pos = this.documents.indexOf(newDocument);
-    if (pos < 0) {
-      return;
-    }
+    this.maxDocumentId++;
+    newDocument.id = this.maxDocumentId.toString();
+    this.documents.push(newDocument);
+    const documentsListClone = this.documents.slice();
+    this.documentListChangedEvent.next(documentsListClone);
   }
 
   updateDocument(
@@ -75,6 +78,16 @@ export class DocumentService {
         newDocument === null) {
           return;
         }
+
+    const pos = this.documents.indexOf(originalDocument);
+    if(pos < 0) {
+      return;
+    }
+
+    newDocument.id = originalDocument.id;
+    this.documents[pos] = newDocument;
+    const documentsListClone = this.documents.slice();
+    this.documentListChangedEvent.next(documentsListClone);
   }
 
   initDocuments(){
