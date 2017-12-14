@@ -3,7 +3,7 @@ import { Contact } from './contact.model';
 import { Document } from '../documents/document.model';
 import { MOCKCONTACTS } from './MOCKCONTACTS';
 import { Subject } from 'rxjs/Subject';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
 
 @Injectable()
@@ -75,8 +75,7 @@ export class ContactService {
        }
        newContact.id = originalContact.id;
        this.contacts[pos] = newContact;
-       const contactsListClone = this.contacts.slice();
-       this.contactListChangedEvent.next(contactsListClone);
+       this.storeContacts();
    }
 
      getMaxId(){
@@ -108,13 +107,16 @@ export class ContactService {
      }
 
      storeContacts(){
-       const jsonContacts = JSON.stringify(this.contacts);
-       this.http.put('https://fullstackproject-366.firebaseio.com/contacts.json', jsonContacts)
-        .subscribe(
-          () => {
-            this.contactListChangedEvent.next(this.contacts.slice());
-          }
-        );
+       const headers = new Headers({'Content-Type':'application/json'});
+
+       return this.http.put('https://fullstackproject-366.firebaseio.com/contacts.json',
+        this.getContacts(),
+        {headers:headers}
+      ).subscribe(
+        () => {
+          this.contactChangedEvent.next(this.contacts.slice());
+        }
+      )
      }
 
   }

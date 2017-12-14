@@ -9,9 +9,9 @@ import { Subscription } from 'rxjs/Subscription';
   templateUrl: './document-list.component.html',
   styleUrls: ['./document-list.component.css']
 })
-export class DocumentListComponent implements OnInit {
+export class DocumentListComponent implements OnInit, OnDestroy {
   documents: Document[] = [];
-  private subscription: Subscription;
+  subscription: Subscription;
 
   constructor(private documentService: DocumentService) { }
 
@@ -20,7 +20,7 @@ export class DocumentListComponent implements OnInit {
     this.subscription = this.documentService.documentListChangedEvent
       .subscribe(
         (documentList: Document[]) => {
-          this.documents = documentList
+          this.documents = documentList;
         }
     );
 }

@@ -10,7 +10,6 @@ import { WindRefService } from '../../wind-ref/wind-ref.service';
   styleUrls: ['./document-detail.component.css']
 })
 export class DocumentDetailComponent implements OnInit {
-  // @Input() document: Document;
   document: Document;
   id: string;
   nativeWindow: any;
@@ -37,9 +36,9 @@ export class DocumentDetailComponent implements OnInit {
     }
   }
 
-  onDelete(id: string) {
+  onDelete() {
     this.documentService.deleteDocument(this.document);
-    this.router.navigate(['/documents']);
+    this.router.navigate(['/documents'], {relativeTo: this.route});
   }
 
 }

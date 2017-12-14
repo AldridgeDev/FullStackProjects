@@ -2,15 +2,13 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { MOCKDOCUMENTS } from './MOCKDOCUMENTS';
 import { Document } from './document.model';
 import { Subject } from 'rxjs/Subject';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import 'rxjs/Rx';
 
 @Injectable()
 export class DocumentService {
   documents: Document[] = [];
-  currentId: number;
   selectedDocumentEvent = new EventEmitter<Document>();
-  documentChangedEvent = new EventEmitter<Document[]>();
   documentListChangedEvent = new Subject<Document[]>();
   maxDocumentId: number;
 
@@ -107,13 +105,16 @@ export class DocumentService {
   }
 
   storeDocuments(){
-    const jsonDocs = JSON.stringify(this.documents);
-    this.http.put('https://fullstackproject-366.firebaseio.com/documents.json', jsonDocs)
-      .subscribe(
-        () => {
-          this.documentListChangedEvent.next(this.documents.slice());
-        }
-      );
+    const headers = new Headers({'Content-Type': 'application/json'});
+    this.http.put('https://fullstackproject-366.firebaseio.com/documents.json',
+      this.getDocuments(),
+      {headers: headers}
+    ) .subscribe (
+      () => {
+        this.documentListChangedEvent.next(this.documents.slice());
+      }
+    );
+
   }
 
   }

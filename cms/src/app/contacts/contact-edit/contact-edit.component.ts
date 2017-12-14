@@ -47,7 +47,6 @@ export class ContactEditComponent implements OnInit {
 
   onSubmit(form: NgForm) {
     const values = form.value;
-      console.log(values);
     const newContact = new Contact(
       this.id,
       values.name,
@@ -63,11 +62,11 @@ export class ContactEditComponent implements OnInit {
       this.contactService.addContact(newContact);
     }
 
-    this.router.navigate(['/contacts']);
+    this.router.navigate(['/contacts'], {relativeTo: this.route});
   }
 
 onCancel(){
-  this.router.navigate(['/contacts']);
+  this.router.navigate(['/contacts'], {relativeTo: this.route});
 }
 
 isInvalidContact(newContact: Contact){
@@ -99,8 +98,9 @@ addToGroup($event: any){
 
 onRemoveItem(idx: number){
   // if contact is outside the bounds of the array
-  if (idx < 0 || idx >= this.groupContacts.length)
-  return;
+  if (idx < 0 || idx >= this.groupContacts.length) {
+    return;
+}
 
   this.groupContacts.splice(idx, 1);
   this.invalidGroupContact = false;
