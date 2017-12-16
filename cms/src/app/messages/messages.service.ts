@@ -70,14 +70,14 @@ export class Messages {
 
   storeMessages() {
     const msgheaders = new Headers({'Content-Type':'application/json'});
-    return this.http.put('https://fullstackproject-36.firebaseio.com/messages.json',
+    return this.http.put('https://fullstackproject-366.firebaseio.com/messages.json',
       this.getMessages(),
         {headers: msgheaders}
   ) .subscribe(
     () => {
       this.messageChangedEvent.next(this.messages.slice());
     }
-  )
+  );
 
   }
 

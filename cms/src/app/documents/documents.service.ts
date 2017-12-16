@@ -23,7 +23,7 @@ export class DocumentService {
   getDocument(id: string): Document {
     for (let document of this.documents){
       if (document.id === id){
-        return document;
+        return document; 
       }
     }
     return null;

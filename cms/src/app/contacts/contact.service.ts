@@ -57,8 +57,7 @@ export class ContactService {
      this.maxContactId++;
      newContact.id = this.maxContactId.toString();
      this.contacts.push(newContact);
-     const contactsListClone = this.contacts.slice();
-     this.contactListChangedEvent.next(contactsListClone);
+     this.storeContacts();
    }
 
    updateContact(
@@ -81,12 +80,12 @@ export class ContactService {
      getMaxId(){
        let maxId: number = 0;
        for (let contact of this.contacts) {
-         this.currentId = +contact.id;
-         if (this.currentId > this.maxId) {
-           this.maxId = this.currentId;
+         let currentId = +contact.id;
+         if (currentId > maxId) {
+           maxId = currentId;
          }
        }
-       return this.maxId;
+       return maxId;
      }
 
      initContacts(){
@@ -101,22 +100,22 @@ export class ContactService {
           (contactsReturned: Contact[]) => {
             this.contacts = contactsReturned;
             this.maxContactId = this.getMaxId();
-            this.contactListChangedEvent.next(this.contacts.slice());
+            const contactListClone = this.contacts.slice();
+            this.contactListChangedEvent.next(contactListClone);
           }
         );
      }
 
      storeContacts(){
        const headers = new Headers({'Content-Type':'application/json'});
-
-       return this.http.put('https://fullstackproject-366.firebaseio.com/contacts.json',
+        this.http.put('https://fullstackproject-366.firebaseio.com/contacts.json',
         this.getContacts(),
         {headers:headers}
       ).subscribe(
         () => {
-          this.contactChangedEvent.next(this.contacts.slice());
+          this.contactListChangedEvent.next(this.contacts.slice());
         }
-      )
+      );
      }
 
   }

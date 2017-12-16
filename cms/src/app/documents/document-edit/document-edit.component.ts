@@ -46,7 +46,7 @@ export class DocumentEditComponent implements OnInit {
                                       null,
                                       values.name,
                                       values.description,
-                                      values.documentUrl,
+                                      values.url,
                                       null );
 
     if (this.editMode) {

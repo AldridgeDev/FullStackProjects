@@ -34,14 +34,14 @@
         </div>
 
         <div class="col-sm-12 form-group">
-          <label for="documentUrl">Document URL</label>
+          <label for="url">Document URL</label>
           <input
-            name="documentUrl"
-            [ngModel]="originalDocument?.documentUrl"
-            #documentUrl="ngModel"
+            name="url"
+            [ngModel]="originalDocument?.url"
+            #url="ngModel"
             required
             type="text"
-            id="documentUrl"
+            id="url"
             class="form-control"
             size="150"
             max="255">
@@ -49,7 +49,7 @@
         </div>
       </div>
       <div class="alert alert-danger"
-        *ngIf="!name.valid || !documentUrl.valid">
+        *ngIf="!name.valid || !url.valid">
       The Document title and URL are required fields
     </div>
 
@@ -57,7 +57,7 @@
         <div class="col-xs-12">
           <button
             class="btn btn-success"
-            [disabled]="!name.valid || !documentUrl.valid"
+            [disabled]="!name.valid || !url.valid"
             type="submit"
           >Save</button>
           <button

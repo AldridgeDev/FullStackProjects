@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ContactService } from '../contact.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-// import { DocumentEditComponent } from '../../documents/document-edit/document-edit.component';
 import { Contact } from '../contact.model';
 import { NgForm } from '@angular/forms';
 
@@ -18,6 +17,7 @@ export class ContactEditComponent implements OnInit {
   originalContact: Contact;
   id: string;
   invalidGroupContact: boolean = false;
+
 
   constructor(private contactService: ContactService,
               private router: Router,
@@ -53,7 +53,7 @@ export class ContactEditComponent implements OnInit {
       values.email,
       values.phone,
       values.imageUrl,
-      this.groupContacts
+      null //ng-dnd doesn't work
     );
 
     if (this.editMode) {
@@ -86,15 +86,15 @@ isInvalidContact(newContact: Contact){
   return false;
 }
 
-addToGroup($event: any){
-  let selectedContact: Contact = $event.dragData;
-  this.invalidGroupContact = this.isInvalidContact(selectedContact);
-  if (this.invalidGroupContact){
-    return;
-  }
-  this.groupContacts.push(selectedContact);
-  this.invalidGroupContact = false;
-}
+// addToGroup($event: any){
+//   let selectedContact: Contact = $event.dragData;
+//   this.invalidGroupContact = this.isInvalidContact(selectedContact);
+//   if (this.invalidGroupContact){
+//     return;
+//   }
+//   this.groupContacts.push(selectedContact);
+//   this.invalidGroupContact = false;
+// } //ng-dnd not working
 
 onRemoveItem(idx: number){
   // if contact is outside the bounds of the array
