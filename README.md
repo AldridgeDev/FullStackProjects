@@ -10,3 +10,5 @@ It grabs its users from the contacts section
 The contacts section allows you to create, edit, delete, and search for contacts
 Each contact must contain an email and phone number
 Each contact may contain an image via url specified
+
+All data is stored on firebase
